@@ -1,9 +1,6 @@
 package com.itwill06.service.collection.student;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class StudentArrayListMain {
 
@@ -63,7 +60,8 @@ public class StudentArrayListMain {
 		/*
 		 * 4. 번호3번 학생한명 출력
 		 */
-		System.out.println("4.번호3번 학생한명 출력");
+		System.out.println("4. 번호3번 학생한명 출력");
+		Student.headerPrint();
 		for (int i = 0; i < studentList.size(); i++) {
 			if (studentList.get(i).getNo() == 3) {
 				studentList.get(i).print();
@@ -75,20 +73,32 @@ public class StudentArrayListMain {
 		 * 5. 학점A인 학생들 출력
 		 */
 		System.out.println("5. 학점A인 학생들 출력");
+		Student.headerPrint();
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getGrade() == 'A') {
+				studentList.get(i).print();
+			}
+		}
 		
 		/*
 		 6.이름이 KIM인학생들 출력
 		 */
 		System.out.println("6.이름이 KIM인학생들 출력");
+		Student.headerPrint();
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getName().equals("KIM")) {
+				studentList.get(i).print();
+			}
+		}
 		
 		/*
 		 * 7.번호3번학생한명삭제
 		 */
 		System.out.println("7.번호3번학생삭제");
-		
+
 		for (int i = 0; i < studentList.size(); i++) {
-			if(studentList.get(i).getNo()==3) {
-				Student removeStudent=studentList.remove(i);
+			if (studentList.get(i).getNo() == 3) {
+				Student removeStudent = studentList.remove(i);
 				removeStudent.print();
 				break;
 			}
@@ -98,14 +108,29 @@ public class StudentArrayListMain {
 		 * 8.이름KIM인 학생들삭제
 		 */
 		System.out.println("8.이름KIM인 학생들삭제");
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getName().equals("KIM")) {
+				Student removeStudent = studentList.remove(i);
+				removeStudent.print();
+				i--;
+			}
+		}
 		
 		/*
 		 * 9.평점 F 인 학생들삭제
 		 */
 		System.out.println("9.평점 F 인 학생들삭제");
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getGrade() == 'F') {
+				Student removeByGrade = studentList.remove(i);
+				removeByGrade.print();
+				i--;
+			}
+		}
 		
 		
 		/******************안해도됨******************************/
+		// sort 정렬
 		/*
 		 * 10. 학생총점으로 오름차순정렬
 		 */
