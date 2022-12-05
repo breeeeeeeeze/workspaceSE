@@ -45,23 +45,16 @@ public class AcademyMemberService {
 				// 확인용 출력
 				System.out.println(temp);
 				break;
-				}
+			}
 		}
 		return temp;
 	}
-	
+
 	/*
-	public AcademyMember member(int no) {
-		AcademyMember findMember = null;
-		for(int i = 0; i < members.length; i++) {
-		if(members[i].getNo() == no) {
-			findMember = members[i];
-			break;
-			}
-		}
-		return findMember;
-	}
-	*/
+	 * public AcademyMember member(int no) { AcademyMember findMember = null;
+	 * for(int i = 0; i < members.length; i++) { if(members[i].getNo() == no) {
+	 * findMember = members[i]; break; } } return findMember; }
+	 */
 
 	/*
 	 * 2-2.이름 KIM 인 AcademyMember 배열객체 참조변수반환해줘
@@ -93,7 +86,7 @@ public class AcademyMemberService {
 		}
 		return temp;
 	}
-	
+
 	public void findStaff() {
 		for (int i = 0; i < members.length; i++) {
 			if (members[i] instanceof AcademyStaff) {
@@ -101,7 +94,7 @@ public class AcademyMemberService {
 			}
 		}
 	}
-	
+
 	public void findGangsa() {
 		for (int i = 0; i < members.length; i++) {
 			if (members[i] instanceof AcademyGangsa) {
@@ -111,31 +104,24 @@ public class AcademyMemberService {
 	}
 
 	/*
-	 * 4.AcademyMember 중에서 자바반인   AcademyStudent 객체들 배열참조변수반환해줘 
-	 * 4.AcademyMember 중에서 영업부서인 AcademyStaff   객체들 배열참조변수반환해줘 
-	 * 4.AcademyMember 중에서 자바과목인 AcademyGangsa  객체들 배열참조변수반환해줘
+	 * 4.AcademyMember 중에서 자바반인 AcademyStudent 객체들 배열참조변수반환해줘 4.AcademyMember 중에서
+	 * 영업부서인 AcademyStaff 객체들 배열참조변수반환해줘 4.AcademyMember 중에서 자바과목인 AcademyGangsa 객체들
+	 * 배열참조변수반환해줘
 	 */
-	
+
 	public void findJavaStudent() {
 		for (int i = 0; i < members.length; i++) {
 			if (members[i] instanceof AcademyStudent && members[i].getClass().equals("자바")) {
 				members[i].print();
 			}
-			
+
 		}
 	}
 
 	/*
-	 * 5.AcademyMember 중에서 자바반인   AcademyStudent 객체들 배열참조변수반환해줘[OPTION]
-	 * 5.AcademyMember 중에서 영업부서인 AcademyStaff   객체들 배열참조변수반환해줘[OPTION] 
-	 * 5.AcademyMember 중에서 자바과목인 AcademyGangsa  객체들 배열참조변수반환해줘[OPTION]
+	 * 5.AcademyMember 중에서 자바반인 AcademyStudent 객체들 배열참조변수반환해줘[OPTION]
+	 * 5.AcademyMember 중에서 영업부서인 AcademyStaff 객체들 배열참조변수반환해줘[OPTION] 5.AcademyMember
+	 * 중에서 자바과목인 AcademyGangsa 객체들 배열참조변수반환해줘[OPTION]
 	 */
 
 }
-
-
-
-
-
-
-
