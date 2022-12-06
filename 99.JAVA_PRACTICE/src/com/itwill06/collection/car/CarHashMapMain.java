@@ -26,7 +26,7 @@ public class CarHashMapMain {
 		System.out.println("2.차량번호 7789번  차한대 정보출력");
 		System.out.println("3.입차시간 8시이후 차량여러대 찾아서 정보출력");
 		System.out.println("4.2389번차량 12시 출차");
-		/*
+		/* testtest
 		 * 1. 2389번차량찾기
 		 * 2. 출차
 		 * 3. 영수증출력
