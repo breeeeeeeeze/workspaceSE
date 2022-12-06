@@ -8,9 +8,10 @@ public class FileWriterReaderMain {
 	public static void main(String[] args) throws Exception {
 		FileWriter fw = new FileWriter("fileWriter.txt");
 		/*
-		 * public void write(int c) throws IOException - Writes a single character. -
-		 * The character to be written is contained in the 16 low-order bits of the
-		 * given integer value; the 16 high-order bits are ignored.
+		 * public void write(int c) throws IOException
+		 *			- Writes a single character.
+		 * 			- The character to be written is contained in the 16 low-order bits of the given integer value; 
+		 * 			  the 16 high-order bits are ignored.
 		 */
 		fw.write(44356);
 		fw.write('A');
@@ -39,12 +40,14 @@ public class FileWriterReaderMain {
 
 		FileReader fr = new FileReader("fileWriter.txt");
 		/*
-		 * public int read() throws IOException -Reads a single character. - This method
-		 * will block until a character is available, an I/O error occurs, or the end of
-		 * the stream is reached.
+		 * public int read() throws IOException 
+		 * 			- Reads a single character.
+		 * 			- This method will block until a character is available,
+		 * 			  an I/O error occurs, or the end of the stream is reached.
 		 * 
-		 * Returns: The character read, as an integer in the range 0 to 65535
-		 * (0x00-0xffff), or -1 if the end of the stream has been reached
+		 * Returns: 
+		 * 			The character read, as an integer in the range 0 to 65535 (0x00-0xffff),
+		 * 			or -1 if the end of the stream has been reached
 		 */
 		int readChar = fr.read();
 		System.out.println("1.readChar:" + (char) readChar);
