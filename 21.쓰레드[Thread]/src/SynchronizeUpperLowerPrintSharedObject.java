@@ -21,7 +21,7 @@ public class SynchronizeUpperLowerPrintSharedObject {
 		System.out.print("r");
 		System.out.print("s");
 		System.out.print("t");
-		System.out.print("u");
+		System.out.print("u");s
 		System.out.print("v");
 		System.out.print("w");
 		System.out.print("x");
