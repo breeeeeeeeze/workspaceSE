@@ -1,6 +1,6 @@
 
 public class SynchronizeUpperLowerPrintSharedObject {
-	public void printLower() {
+	public synchronized void printLower() {
 		System.out.print("a");
 		System.out.print("b");
 		System.out.print("c");
@@ -28,8 +28,7 @@ public class SynchronizeUpperLowerPrintSharedObject {
 		System.out.print("y");
 		System.out.print("z");
 	}
-
-	public void printUpper() {
+	public synchronized void printUpper() {
 		System.out.print("A");
 		System.out.print("B");
 		System.out.print("C");
