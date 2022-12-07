@@ -5,19 +5,19 @@ import java.util.HashMap;
 public class CarHashMapMain {
 
 	public static void main(String[] args) {
-		Car c1 = new Car("2344",3 );
-		Car c2 = new Car("4566",4 );
-		Car c3 = new Car("4567",5 );
-		Car c4 = new Car("2389",6 );
-		Car c5 = new Car("3908",7 );
-		Car c6=  new Car("7891",8 );
-		Car c7 = new Car("5656",9 );
-		Car c8 = new Car("7789",10 );
-		Car c9 = new Car("4690",11 );
+		Car c1 = new Car("2344", 3);
+		Car c2 = new Car("4566", 4);
+		Car c3 = new Car("4567", 5);
+		Car c4 = new Car("2389", 6);
+		Car c5 = new Car("3908", 7);
+		Car c6 = new Car("7891", 8);
+		Car c7 = new Car("5656", 9);
+		Car c8 = new Car("7789", 10);
+		Car c9 = new Car("4690", 11);
 		/*
 		 * Car HashMap 객체생성 초기화
 		 */
-		HashMap<String,Car> carMap=new HashMap<String,Car>();		
+		HashMap<String, Car> carMap = new HashMap<String, Car>();
 		System.out.println("1.입차 9대");
 		/*
 		 * 1.차량객체생성
@@ -36,10 +36,3 @@ public class CarHashMapMain {
 	}
 
 }
-
-
-
-
-
-
-
