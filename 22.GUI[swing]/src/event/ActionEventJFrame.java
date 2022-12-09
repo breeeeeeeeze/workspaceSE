@@ -2,6 +2,8 @@ package event;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,20 +50,74 @@ public class ActionEventJFrame extends JFrame{
 		westBtn=new JButton("이벤트쏘스[WEST]");
 		
 		/*********이벤트핸들러객체등록*********/
-		northBtn.addActionListener(
-				new NorthButtonActionEventHandler(this));
+		/*NorthButtonActionEventHandler handler=
+				new NorthButtonActionEventHandler(this);
+		northBtn.addActionListener(handler);
+		southBtn.addActionListener(new SouthButtonActionEventHandler());*/
+		// 위의 주석 =  Nested class 배우기 전
+		
+		/* 1.외부클래스 */
+		NorthButtonActionEventHandler handler=
+				new NorthButtonActionEventHandler(this);
+		northBtn.addActionListener(handler);
+		/* 2.멤버내부클래스*/
+		southBtn.addActionListener(new SouthButtonActionEventHandler());
+		/* 3.익명클래스*/
+		ActionListener westButtonHandler=new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("west button click!!!");
+			}
+		};
+		westBtn.addActionListener(westButtonHandler);
+		
+		
+		eastBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("east button click!!!");
+			}
+		});
+		
 		
 		contentPane.add(northBtn,BorderLayout.NORTH);
 		contentPane.add(southBtn,BorderLayout.SOUTH);
-		/*
 		contentPane.add(eastBtn,BorderLayout.EAST);
 		contentPane.add(westBtn,BorderLayout.WEST);
-		*/
+		
 		this.setSize(300, 400);
 		this.setVisible(true);
 	}
+	/*************member inner class****************/
+	public class SouthButtonActionEventHandler 
+			implements ActionListener{
+		int count;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+				count++;
+				
+				setTitle("south button click["+count+"]");
+				int r=(int)(Math.random()*256);
+				int g=(int)(Math.random()*256);
+				int b=(int)(Math.random()*256);
+				contentPane.setBackground(new Color(r, g, 255));
+				
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		new ActionEventJFrame();
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
