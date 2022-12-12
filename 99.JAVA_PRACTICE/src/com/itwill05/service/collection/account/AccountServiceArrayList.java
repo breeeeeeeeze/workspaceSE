@@ -1,6 +1,8 @@
 package com.itwill05.service.collection.account;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /*
  * 1.ArrayList<Account>(계좌객체들) 을멤버변수로가진다.
@@ -101,7 +103,12 @@ public class AccountServiceArrayList {
 	 */
 	public Account findByNo(int no) {
 		Account findAccount = null;
-
+		for (Account account : accountList) {
+			if (account.getNo() == no) {
+				findAccount = account;
+				break;
+			}
+		}
 		return findAccount;
 	}
 
@@ -110,22 +117,14 @@ public class AccountServiceArrayList {
 	 */
 	public ArrayList<Account> findByBalance(int balance) {
 		ArrayList<Account> findAccountList = new ArrayList<Account>();
-
+		Account.headerPrint();
+		for (Account account : accountList) {
+			if (account.getBalance() >= balance) {
+				findAccountList.add(account);
+				account.print();
+			}
+		}
 		return findAccountList;
-	}
-
-	/*
-	 * 8.6666번계좌 4000원 입금한후 입금계좌 참조변수반환
-	 */
-	public Account ipGum(int no, int m) {
-		return null;
-	}
-
-	/*
-	 * 9.1111번계좌 5000원 출금한후 출금계좌 참조변수반환
-	 */
-	public Account chulGum(int no, int m) {
-		return null;
 	}
 
 	/*
@@ -133,8 +132,42 @@ public class AccountServiceArrayList {
 	 */
 	public ArrayList<Account> findByName(String owner) {
 		ArrayList<Account> findAccountList = new ArrayList<Account>();
-
+		for (Account account : accountList) {
+			if (account.getOwner().equals(owner)) {
+				account.print();
+			}
+		}
 		return findAccountList;
+	}
+
+	/*
+	 * 9.1111번계좌 5000원 출금한후 출금계좌 참조변수반환
+	 */
+	public Account chulGum(int no, int m) {
+		Account temp = null;
+		for (Account account : accountList) {
+			if (account.getNo() == no) {
+				account.withDraw(m);
+				temp = account;
+				break;
+			}
+		}
+		return temp;
+	}
+
+	/*
+	 * 8.6666번계좌 4000원 입금한후 입금계좌 참조변수반환
+	 */
+	public Account ipGum(int no, int m) {
+		Account temp = null;
+		for (Account account : accountList) {
+			if (account.getNo() == no) {
+				account.deposit(m);
+				temp = account;
+				break;
+			}
+		}
+		return temp;
 	}
 
 	/*
@@ -142,7 +175,11 @@ public class AccountServiceArrayList {
 	 */
 	public ArrayList<Account> findByVip(int balance) {
 		ArrayList<Account> findAccountList = new ArrayList<Account>();
-
+		for (Account account : accountList) {
+			if (account.getBalance() >= balance) {
+				account.print();
+			}
+		}
 		return findAccountList;
 	}
 
@@ -151,6 +188,12 @@ public class AccountServiceArrayList {
 	 *  	Collections.sort();
 	 */
 	public void sortByBalanceAsc() {
+		Collections.sort(accountList, new Comparator<Account>() {
+			@Override
+			public int compare(Account o1, Account o2) {
+				return o1.getBalance() - o2.getBalance();
+			}
+		});
 
 	}
 
@@ -159,14 +202,28 @@ public class AccountServiceArrayList {
 	 * 		Collections.sort();
 	 */
 	public void sortByBalanceDesc() {
-
+		Collections.sort(accountList, new Comparator<Account>() {
+			@Override
+			public int compare(Account o1, Account o2) {
+				return o2.getBalance() - o1.getBalance();
+			}
+		});
 	}
 
 	/*
 	 * 12.6666번계좌의 이름,잔고,이율 수정(update)후 수정된객체 반환
 	 */
 	public Account updateAccount(Account updateAccount) {
-		return null;
+		Account updateAcc = null;
+		for (Account account : accountList) {
+			if (account.getNo() == updateAccount.getNo()) {
+				account.setOwner(updateAccount.getOwner());
+				account.setBalance(updateAccount.getBalance());
+				account.setIyul(updateAccount.getIyul());
+				updateAcc = account;
+			}
+		}
+		return updateAcc;
 	}
 
 	/*
@@ -174,8 +231,11 @@ public class AccountServiceArrayList {
 	 */
 	public Account deleteByNo(int no) {
 		Account deleteAccount = null;
-
+		for (int i = 0; i < accountList.size(); i++) {
+			if (accountList.get(i).getNo() == no) {
+				deleteAccount = accountList.remove(i);
+			}
+		}
 		return deleteAccount;
 	}
-
 }

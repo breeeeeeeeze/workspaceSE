@@ -21,14 +21,14 @@ public class AccountServiceArrayListMain {
 
 		System.out.println("1.AccountServiceArrayList야 은행계좌들 총계좌수반환해줘");
 		int accountCount = accountServiceArrayList.totAccountNumber();
-		System.out.println("총계좌수[main]:" + accountCount);
+		System.out.println("총계좌수[main] : " + accountCount);
 
 		System.out.println("2.AccountServiceArrayList야 은행계좌들 전체출력해줘");
 		accountServiceArrayList.print();
 
 		System.out.println("3.AccountServiceArrayList야은행계좌들 총잔고 반환해줘");
 		int totBalance = accountServiceArrayList.totBalance();
-		System.out.println("총잔고[main]:" + totBalance);
+		System.out.println("총잔고[main] : " + totBalance);
 
 		System.out.println("4.AccountServiceArrayList야 계좌번호줄께 계좌한개반환해줘");
 		Account findAccount = accountServiceArrayList.findByNo(5555);
@@ -37,10 +37,11 @@ public class AccountServiceArrayListMain {
 
 		System.out.println("5.AccountServiceArrayList야 계좌잔고줄께 잔고이상인 계좌들반환해줘[OPTION]");
 		ArrayList<Account> findAccounts = accountServiceArrayList.findByBalance(50000);
-		System.out.println(" 반환계좌수:" + findAccounts.size());
+		System.out.println(" 반환계좌수 : " + findAccounts.size());
 
 		System.out.println("7.AccountServiceArrayList야은행계좌들 중에 계좌주이름이 AIM인 계좌들반환해줘");
 		findAccounts = accountServiceArrayList.findByName("AIM");
+		
 		/*
 		 * 8.6666번계좌 4000원 입금해줘
 		 */
@@ -68,7 +69,7 @@ public class AccountServiceArrayListMain {
 		Account updateAccount2 = accountServiceArrayList.updateAccount(updateAccount1);
 		updateAccount2.print();
 
-		System.out.println(" 12.8888번계좌삭제후 Account객체반환받음");
+		System.out.println(" 13.8888번계좌삭제후 Account객체반환받음");
 		Account deleteAccount = accountServiceArrayList.deleteByNo(8888);
 		deleteAccount.print();
 		System.out.println("-----------전체계좌 출력-------------");
