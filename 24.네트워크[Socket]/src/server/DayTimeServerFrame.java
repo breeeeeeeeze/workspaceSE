@@ -74,18 +74,18 @@ public class DayTimeServerFrame extends JFrame {
 		public void run() {
 			try {
 				displayLog("0.DayTimeServerThread:ServerSocket생성(8000)");
-				ServerSocket serverSocket=new ServerSocket(8000);
+				ServerSocket serverSocket = new ServerSocket(8000);
 				while (true) {
 					displayLog("1.DayTimeServerThread:클라이언트연결요청대기(쓰레드대기)");
-					Socket socket=serverSocket.accept();
-					displayLog("2.DayTimeServerThread:클라이언트와연결된서버쪽 소켓생성"+socket);
+					Socket socket = serverSocket.accept();
+					displayLog("2.DayTimeServerThread:클라이언트와연결된서버쪽 소켓생성" + socket);
 					String serverIP = socket.getLocalAddress().getHostAddress();
 					PrintWriter out=
 							new PrintWriter(
 									new OutputStreamWriter(
 											socket.getOutputStream()));
 					displayLog("3.DayTimeServerThread:소켓으로부터 OutputStream생성");
-					Date serverDate=new Date();
+					Date serverDate = new Date();
 					String serverTimeStr = serverDate.toLocaleString();
 					out.println("["+serverIP+"]"+serverTimeStr);
 					out.flush();

@@ -72,7 +72,7 @@ public class DayTimeClientFrame extends JFrame {
 					 * 브릿지스트림(InputStreamReader) 을사용해서 변경
 					 */
 					InputStream in = socket.getInputStream();
-					InputStreamReader isr = new InputStreamReader(in, "UTF-8");
+					InputStreamReader isr = new InputStreamReader(in, "UTF-8");    // InputStreamReader isr을 UTF-8로 인코딩해서 받아 오겠다.
 					BufferedReader br = new BufferedReader(isr);
 					String serverTime = br.readLine();
 					// System.out.println(serverTime);

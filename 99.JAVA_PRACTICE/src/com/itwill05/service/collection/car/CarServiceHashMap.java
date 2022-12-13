@@ -2,11 +2,7 @@ package com.itwill05.service.collection.car;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.Map.Entry;
-
-import generic.Car;
 
 public class CarServiceHashMap {
 
@@ -29,7 +25,20 @@ public class CarServiceHashMap {
 	 */
 	public boolean ipCha(Car inCar) {
 		boolean isSuccess = false;
+//			if (carMap.isEmpty()) {
+//				isSuccess = true;
+//				carMap.put(inCar.getNo(), inCar);
+//				System.out.println("입차 성공");
+//			}else {
+//				isSuccess = false;
+//			}
 
+		if (carMap.size() < count) {
+			carMap.put(inCar.getNo(), inCar);
+			isSuccess = true;
+		} else {
+			isSuccess = false;
+		}
 		return isSuccess;
 	}
 
@@ -38,11 +47,24 @@ public class CarServiceHashMap {
 	 */
 	public void print() {
 		Car.headerPrint();
-		for(Entry<String, Car> entry : carMap.entrySet()) {
-			String key = entry.getKey();
+		for (Entry<String, Car> entry : carMap.entrySet()) {
 			Car car = entry.getValue();
 			car.print();
 		}
+	}
+
+	/*
+	 * 2. 주차전체구획수반환 
+	 */
+	public int getParkingLotCount() {
+		return this.count;
+	}
+
+	/*
+	  3. 주차가능주차구획수반환 
+	 */
+	public int getAvailableParkingLotCount() {
+		return count - carMap.size();
 	}
 
 	/*
@@ -59,7 +81,7 @@ public class CarServiceHashMap {
 	 */
 	public ArrayList<Car> findByInTime(int inTime) {
 		ArrayList<Car> findCars = new ArrayList<Car>();
-
+		/*
 		Iterator<String> carNoIterator = carMap.keySet().iterator();
 		while (carNoIterator.hasNext()) {
 			String carNo = carNoIterator.next();
@@ -68,7 +90,12 @@ public class CarServiceHashMap {
 				findCars.add(tempCar);
 			}
 		}
-
+		*/
+		for (Entry<String, Car> entry : carMap.entrySet()) {
+			if (entry.getValue().getOutTime() >= inTime) {
+				findCars.add(entry.getValue());
+			}
+		}
 		return findCars;
 	}
 
@@ -76,23 +103,24 @@ public class CarServiceHashMap {
 	 * 7. 차량번호(7891번),출차시간(12시)인자로 받아서 출차";
 	 */
 	public Car chulCha(String no, int outTime) {
+		Car.headerPrint();
 		Car removeCar = null;
+		for (Entry<String, Car> entry : carMap.entrySet()) {
+			if (entry.getKey().equals(no)) {
+				/*removeCar = entry.getValue();
+				removeCar.setOutTime(outTime);
+				removeCar.calculateFee();
+				removeCar.print();
+				carMap.remove(no);*/
+				entry.getValue().setOutTime(outTime);
+				entry.getValue().calculateFee();
+				carMap.remove(no);
+				removeCar = entry.getValue();
+				break;
+			}
+		}
 
 		return removeCar;
-	}
-
-	/*
-	 * 2. 주차전체구획수반환 
-	 */
-	public int getParkingLotCount() {
-		return this.count;
-	}
-
-	/*
-	  3. 주차가능주차구획수반환 
-	 */
-	public int getAvailableParkingLotCount() {
-		return count - carMap.size();
 	}
 
 }
