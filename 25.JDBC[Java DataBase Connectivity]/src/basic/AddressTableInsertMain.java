@@ -7,11 +7,12 @@ import java.sql.Statement;
 public class AddressTableInsertMain {
 
 	public static void main(String[] args) throws Exception {
+		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "scott";
 		String password = "tiger";
-		
+		/***********************************************/
 		String insertSQL = "insert into address values(address_no_seq.nextval, '인경호', '123-4568', '경기도 시흥시')";
 		
 		/*

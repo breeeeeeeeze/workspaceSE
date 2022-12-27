@@ -101,17 +101,20 @@ public class AcademyMemberService {
 		}
 		return temp;
 	}
-
+	
+	// sort처럼 상수 만들어서 하위 클래스가 형성되어도 메소드가 추후에 수정되지 않도록d(삭제할 것)
 	/*
 	 * 4.AcademyMember 중에서 자바반인   AcademyStudent 객체들 배열참조변수반환해줘 
 	 * 4.AcademyMember 중에서 영업부서인 AcademyStaff   객체들 배열참조변수반환해줘 
 	 * 4.AcademyMember 중에서 자바과목인 AcademyGangsa  객체들 배열참조변수반환해줘
 	 */
-	public AcademyMember findByClass(String ban) {
-		AcademyMember temp = null;
+	public AcademyMember[] findByClass(String ban) {
+		int index = 0;
+		AcademyMember[] temp = null;
 		for (AcademyMember academyMember : members) {
 			if (academyMember.getClass().equals(ban)) {
-				temp = academyMember;
+				temp = new AcademyMember[index];
+				index++;
 				System.out.println(temp);
 			}
 		}

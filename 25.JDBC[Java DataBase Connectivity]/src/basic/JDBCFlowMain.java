@@ -59,7 +59,7 @@ public class JDBCFlowMain {
 			40		OPERATIONS		BOSTON
 			AFTER LAST  영역   
 		 */
-		//ResultSet rs = stmt.executeQuery("select deptno,dname,loc from dept order by deptno");
+		//ResultSet rs = stmt.executeQuery("select deptno, dname, loc from dept order by deptno");
 		ResultSet rs = stmt.executeQuery(selectSql);		
 		System.out.println("4,5. ResultSet 객체얻기(select문 실행결과) : " + rs);
 		System.out.println("---------------------------------");
