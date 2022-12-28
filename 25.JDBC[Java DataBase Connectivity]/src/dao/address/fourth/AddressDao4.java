@@ -23,11 +23,10 @@ public class AddressDao4 {
 		String user = "scott";
 		String password = "tiger";
 		/***********************************************/
-		String insertSQL=
-				"insert into address values(address_no_seq.nextval,'"
-							+newAddress.getName()+"','"
-							+newAddress.getPhone()+"','"
-							+newAddress.getAddress()+"')";
+		String insertSQL = "insert into address values(address_no_seq.nextval,'"
+							+ newAddress.getName() +"','"
+							+ newAddress.getPhone() +"','"
+							+ newAddress.getAddress() +"')";
 		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
@@ -129,7 +128,7 @@ public class AddressDao4 {
 		String selectSQL = "select no,name,phone,address from address";
 		
 		List<Address> addressList = new ArrayList<Address>(); // 메소드 내부니까 의존성 발생해도 상관없음 밖에선 모르니까
-		// public List<Address> findAll() throws Exception { <--- 리턴타입, .. , 예외만 의존성 없으면 ㅇㅋ
+		// public List<Address> findAll() throws Exception { <--- 리턴타입, .. , 예외만 의존성 없으면 괜찮다
 		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
