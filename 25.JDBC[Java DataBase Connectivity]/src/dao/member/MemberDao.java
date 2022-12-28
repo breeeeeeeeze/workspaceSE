@@ -23,13 +23,12 @@ public class MemberDao {
 	public int insert(Member m) throws Exception {
 		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
 		String user = "jdeveloper12";
 		String password = "jdeveloper12";
 		/***********************************************/
-		String insertSQL = "insert into memeber values('" + m.getM_id() + "', '" + m.getM_password() + "' , '" 
-							+ m.getM_name() + "' , '" + m.getM_address() + "', '" +m.getM_age() + "' , '" 
-							+ m.getM_married() + "', + sysdate + ')";
+		String insertSQL = "insert into member values('" + m.getM_id() + "','" + m.getM_password() + "', '" + m.getM_name() + "','" + m.getM_address() + "', '" + m.getM_age() + "','" + m.getM_married() + "',"
+				+ "sysdate" + ")";
 
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
@@ -46,12 +45,28 @@ public class MemberDao {
 	public int update(Member m) throws Exception {
 		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
 		String user = "jdeveloper12";
 		String password = "jdeveloper12";
 		/***********************************************/
-		String updateSQL = "update member set password = '" + m.getM_password() + "'"
-							+ m.getM_name();
+		
+		String updateSQL = "update member set m_password = '" + m.getM_password() + "',m_name = '" + m.getM_name() 
+						+ "',m_address = '" + m.getM_address() + "',m_age = '" + m.getM_age()
+						+ "',m_married = '" + m.getM_married() + "' where m_id = " + "'" + m.getM_id() + "'";
+		
+		
+//		String updateSQL = "update member set m_id = '" + m.getM_id() + "','" + m.getM_password() + "', '" + m.getM_name() + "','" + m.getM_address() + "', '" + m.getM_age() + "','" + m.getM_married() + "',"
+//				+ "sysdate" +"' where m_id="+"'"+m.getM_id()+"'";
+		
+	/*
+	 * String updateSQL = "update member set m_password='"+updateMember.getM_password()+"', 
+	 * m_name='"+updateMember.getM_name()+"'
+	 * , m_address='"+updateMember.getM_address()+"'
+	 * , m_age="+updateMember.getM_age()+"
+	 * , m_married='"+updateMember.getM_married()+"'
+	 * , m_regdate=sysdate where m_id='"
+	 * +updateMember.getM_id()+"'";		
+	 */
 		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
@@ -65,10 +80,10 @@ public class MemberDao {
 		return rowCount;
 	}
 
-	public int delete(int id) throws Exception {
+	public int delete(String id) throws Exception {
 		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
 		String user = "jdeveloper12";
 		String password = "jdeveloper12";
 		/***********************************************/
@@ -86,33 +101,34 @@ public class MemberDao {
 		return rowCount;
 	}
 
-	public Member findByPrimaryKey(int id) throws Exception {
+	public Member findByPrimaryKey(String id) throws Exception {
 		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
 		String user = "jdeveloper12";
 		String password = "jdeveloper12";
 		/***********************************************/
 		String selectSQL = "select * from member where m_id = " + id;
+
+		Member findMember = null;
 		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		
-		Member findMember = null;
-		
 		if (rs.next()) {
-			int i = rs.getInt("m_id");
+			String i = rs.getString("m_id");
 			String pw = rs.getString("m_password");
 			String name = rs.getString("m_name");
 			String address = rs.getString("m_address");
 			int age = rs.getInt("m_age");
 			char married = rs.getString("m_married").charAt(0);
 			Date regdate = rs.getDate("m_regdate");
-			// findMember = new Member(i, pw, name, address, age, married, regdate);
+			findMember = new Member(i, pw, name, address, age, married, regdate);
 		} else {
 			findMember = null;
+			System.out.println("member가 존재하지 않습니다.");
 		}
 		
 		rs.close();
@@ -125,7 +141,7 @@ public class MemberDao {
 	public List<Member> findAll() throws Exception {
 		/*****************데이타베이스접속정보***********/
 		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
 		String user = "jdeveloper12";
 		String password = "jdeveloper12";
 		/***********************************************/
@@ -140,18 +156,18 @@ public class MemberDao {
 		
 		if (rs.next()) {
 			do {
-				int i = rs.getInt("m_id");
+				String i = rs.getString("m_id");
 				String pw = rs.getString("m_password");
 				String name = rs.getString("m_name");
 				String address = rs.getString("m_address");
 				int age = rs.getInt("m_age");
-				// char married = rs.getchar("m_married");
+				char married = rs.getString("m_married").charAt(0);
 				Date regdate = rs.getDate("m_regdate");
-				// Member member = new Member(i, pw, name, address, age, married, regdate);
-				// memberList.add(member);
+				Member member = new Member(i, pw, name, address, age, married, regdate);
+				memberList.add(member);
 			} while (rs.next());
 		} else {
-			System.out.println("없음");
+			System.out.println("member가 존재하지 않습니다.");
 		}
 
 		rs.close();

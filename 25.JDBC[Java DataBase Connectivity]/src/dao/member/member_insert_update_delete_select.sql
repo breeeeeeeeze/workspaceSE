@@ -1,20 +1,18 @@
 --member table  CRUD sql
 
 --insert
-
 insert into member(m_id,m_password,m_name,m_address,m_age,m_married,m_regdate)
-                values('aaaa','aaaa','±è°æ¼ö','ºÎ»ê½Ã ¿µµµ±¸',37,'F',sysdate);
+                values('aaaa','aaaa','ê¹€ê²½ìˆ˜','ë¶€ì‚°ì‹œ ì˜ë„êµ¬',37,'F',sysdate);
 insert into member(m_id,m_password,m_name,m_address,m_age,m_married,m_regdate)
-                values('bbbb','bbbb','±è°æ¿ì','¼­¿ï½Ã µµºÀ±¸',23,'F',sysdate);
+                values('bbbb','bbbb','ê¹€ê²½ìš°','ì„œìš¸ì‹œ ë„ë´‰êµ¬',23,'F',sysdate);
 insert into member(m_id,m_password,m_name,m_address,m_age,m_married,m_regdate)
-                values('cccc','cccc','±è°æ¹Ì','¼­¿ï½Ã  °­³²±¸',47,'T',sysdate);
+                values('cccc','cccc','ê¹€ê²½ë¯¸','ì„œìš¸ì‹œ  ê°•ë‚¨êµ¬',47,'T',sysdate);
                 
 --update pk
-
 update member set 
     m_password='0000',
-    m_name='±èº¯°æ',
-    m_address='Á¦ÁÖµµ¹Î',
+    m_name='ê¹€ë³€ê²½',
+    m_address='ì œì£¼ë„ë¯¼',
     m_age=20,
     m_married='T',
     m_regdate=sysdate
@@ -22,15 +20,10 @@ where m_id='aaaa';
 
 --delete pk
 delete from member where m_id='aaaa';
+
 --select pk
 select m_id,m_password,m_name,m_address,m_age,m_married,m_regdate from member where m_id='bbbb';
+
 --select All
 select m_id,m_password,m_name,m_address,m_age,m_married,m_regdate from member;
-commit;
-
 desc member;
-
-
-                
-                
-                
