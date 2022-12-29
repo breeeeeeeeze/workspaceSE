@@ -14,7 +14,7 @@ public class MemberDaoTestMain {
 		rowCount = memberDao.insert(insertMember);
 		System.out.println("1.insert   --> " + rowCount + "행 insert");
 		
-		Member updateMember = new Member("cccc", "pw", "KIM", "경기", 37, 'F', null);
+		Member updateMember = new Member("'cccc'", "pw", "KIM", "경기", 37, 'F', null);
 		rowCount = memberDao.update(updateMember);
 		System.out.println("2.update   --> " + rowCount + "행 update");
 		
