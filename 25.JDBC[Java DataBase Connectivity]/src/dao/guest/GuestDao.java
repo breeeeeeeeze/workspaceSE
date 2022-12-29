@@ -2,7 +2,6 @@
 package dao.guest;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -36,18 +35,17 @@ public class GuestDao {
 	}
 	
 	public int insert(Guest guest) throws Exception {
-		String insertSQL = "insert into member values(address_no_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "insert into member values(address_no_seq.nextval, ?, ?, ?, ?, ?, sysdate)";
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(insertSQL);
 		
 		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setDate(2, guest.getGuest_date()); // ?
-		// new java.sql.Date(hiredate.getTime()
-		pstmt.setString(3, guest.getGuest_email());
-		pstmt.setString(4, guest.getGuest_homepage());
-		pstmt.setString(5, guest.getGuest_title());
-		pstmt.setString(6, guest.getGuest_content());
+		//pstmt.setDate(2, null);
+		pstmt.setString(2, guest.getGuest_email());
+		pstmt.setString(3, guest.getGuest_homepage());
+		pstmt.setString(4, guest.getGuest_title());
+		pstmt.setString(5, guest.getGuest_content());
 		
 		int rowCount = pstmt.executeUpdate();
 		System.out.println(">> " + rowCount + "행 Insert");
