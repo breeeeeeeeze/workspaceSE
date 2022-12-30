@@ -31,7 +31,6 @@ public class Guest {
 	private String guest_content;
 	
 	public Guest() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Guest(int guest_no, String guest_name, Date guest_date, String guest_email, String guest_homepage,

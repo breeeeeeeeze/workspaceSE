@@ -5,10 +5,10 @@ public class GuestSQL {
 	private GuestSQL() {
 	}
 	
-	private static final String GUEST_INSERT = "insert into member values(address_no_seq.nextval, ?, ?, ?, ?, ?, ?)";
-	private static final String GUEST_DELETE = "";
-	private static final String GUEST_UPDATE = "";
-	private static final String GUEST_SELECT_BY_NO = "";
-	private static final String GUEST_SELECT_ALL = "";
+	public static final String GUEST_INSERT = "insert into guest values(guest_guest_no_seq.nextval, ?, ?, ?, ?, ?, ?)";
+	public static final String GUEST_DELETE = "delete from guest where guest_no = ?";
+	public static final String GUEST_UPDATE =  "update guest set guest_name = ?, guest_date = ?, guest_email = ?, guest_homepage = ?, guest_title = ?, guest_content = ? where guest_no = ?";
+	public static final String GUEST_SELECT_BY_NO = "select * from guest where guest_no = ?";
+	public static final String GUEST_SELECT_ALL = "select * from guest";
 	
 }

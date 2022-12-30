@@ -80,7 +80,19 @@ public class ResultSetMain {
 		rs.close();
 		
 		System.out.println("-------------ResultSet.getString(\"컬럼이름\")---------------");
+		rs = pstmt.executeQuery();
 		
+		while(rs.next()) {
+			String noStr = rs.getString("no"); // 빅데시..말.. bigdecimal
+			String name = rs.getString("name");
+			String short_desc = rs.getString("short_desc");
+			String priceStr = rs.getString("price");
+			String ipgo_dateStr= rs.getString("ipgo_date"); // date는 timestamp가 디폴트
+			System.out.println(noStr + "\t" + name + "\t" + short_desc + "\t" + priceStr + "\t" + ipgo_dateStr);
+		}
+		
+		rs.close();
+		pstmt.close();
 		dataSource.close(con);
 
 	}

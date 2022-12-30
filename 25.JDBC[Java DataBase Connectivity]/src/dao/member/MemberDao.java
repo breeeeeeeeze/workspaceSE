@@ -1,12 +1,13 @@
 package dao.member;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import dao.common.DataSource;
 
 /*
  * Dao(Data[DataBase] Access Object)객체
@@ -16,22 +17,18 @@ import java.util.List;
  */
 public class MemberDao {
 
-	public MemberDao() {
-		
+	public MemberDao() throws Exception {
+		dataSource = new DataSource();
 	}
+	
+	private DataSource dataSource = new DataSource();
 
 	public int insert(Member m) throws Exception {
-		/*****************데이타베이스접속정보***********/
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user = "jdeveloper12";
-		String password = "jdeveloper12";
-		/***********************************************/
+		
 		String insertSQL = "insert into member values('" + m.getM_id() + "','" + m.getM_password() + "', '" + m.getM_name() + "','" + m.getM_address() + "', '" + m.getM_age() + "','" + m.getM_married() + "',"
 				+ "sysdate" + ")";
 
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(insertSQL);
 		System.out.println(">> " + rowCount + "행 insert");
@@ -43,12 +40,6 @@ public class MemberDao {
 	}
 
 	public int update(Member m) throws Exception {
-		/*****************데이타베이스접속정보***********/
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user = "jdeveloper12";
-		String password = "jdeveloper12";
-		/***********************************************/
 		
 		String updateSQL = "update member set m_password = '" + m.getM_password() + "',m_name = '" + m.getM_name() 
 						+ "',m_address = '" + m.getM_address() + "',m_age = '" + m.getM_age()
@@ -68,8 +59,7 @@ public class MemberDao {
 	 * +updateMember.getM_id()+"'";		
 	 */
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(updateSQL);
 		System.out.println(">> " + rowCount + "행 update");
@@ -81,16 +71,9 @@ public class MemberDao {
 	}
 
 	public int delete(String id) throws Exception {
-		/*****************데이타베이스접속정보***********/
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user = "jdeveloper12";
-		String password = "jdeveloper12";
-		/***********************************************/
 		String deleteSQL = "delete member where m_id = " + id;
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(deleteSQL);
 		System.out.println(">> " + rowCount + "행 delete");
@@ -102,18 +85,11 @@ public class MemberDao {
 	}
 
 	public Member findByPrimaryKey(String id) throws Exception {
-		/*****************데이타베이스접속정보***********/
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user = "jdeveloper12";
-		String password = "jdeveloper12";
-		/***********************************************/
 		String selectSQL = "select * from member where m_id = " + id;
 
 		Member findMember = null;
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		
@@ -139,16 +115,9 @@ public class MemberDao {
 	}
 
 	public List<Member> findAll() throws Exception {
-		/*****************데이타베이스접속정보***********/
-		String driverClass = "oracle.jdbc.OracleDriver";
-		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user = "jdeveloper12";
-		String password = "jdeveloper12";
-		/***********************************************/
 		String selectSQL = "select * from member";
 		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = dataSource.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		
