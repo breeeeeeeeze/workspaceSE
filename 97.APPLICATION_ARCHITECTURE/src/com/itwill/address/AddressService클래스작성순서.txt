@@ -1,0 +1,10 @@
+
+########## AddressService 클래스 작성 ###########
+
+1. AddressService.java 클래스 생성
+2. AddressDao 객체를 멤버필드로선언
+3. AddressService 클래스 생성자에서 AddressDao 객체 생성
+4. 클라이언트 요구사항 분석 시 도출된 단위업무당 한개의 메쏘드생성
+5. 메쏘드 인자반환타입정의
+6. 메쏘드구현
+7. 구현된 메쏘드 테스트	

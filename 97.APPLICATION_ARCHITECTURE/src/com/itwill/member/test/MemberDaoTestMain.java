@@ -1,6 +1,9 @@
-package dao.member;
+package com.itwill.member.test;
 
 import java.util.List;
+
+import com.itwill.member.Member;
+import com.itwill.member.MemberDao;
 
 public class MemberDaoTestMain {
 
@@ -12,7 +15,7 @@ public class MemberDaoTestMain {
 		System.out.println(rowCount + "행 delete 성공");
 		
 		System.out.println("---------- 1.insert ----------");
-		Member insertMember = new Member("eje", "비밀번호", "LEE", "강원", 27, 'M', null);
+		Member insertMember = new Member("tttt", "비밀번호", "LEE", "강원", 27, 'M', null);
 		rowCount = memberDao.insert(insertMember);
 		System.out.println(rowCount + "행 insert 성공");
 		

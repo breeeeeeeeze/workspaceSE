@@ -1,5 +1,5 @@
 
-package dao.guest;
+package com.itwill.guest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import dao.common.DataSource;
+import com.itwill.common.DataSource;
+
+
 
 /*
  * Dao(Data[DataBase] Access Object)객체(클래스)
@@ -42,6 +44,9 @@ public class GuestDao {
 		
 		Date guestDate = new Date();
 		
+		/*
+		 * 파라메타세팅
+		 */
 		pstmt.setString(1, guest.getGuest_name());
 		pstmt.setDate(2, new java.sql.Date(guestDate.getTime()));
 		pstmt.setString(3, guest.getGuest_email());
@@ -65,6 +70,9 @@ public class GuestDao {
 		
 		Date guestDate = new Date();
 		
+		/*
+		 * 파라메타세팅
+		 */
 		pstmt.setString(1, guest.getGuest_name());
 		pstmt.setDate(2, new java.sql.Date(guestDate.getTime()));
 		pstmt.setString(3, guest.getGuest_email());
@@ -86,6 +94,9 @@ public class GuestDao {
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_DELETE);
+		/*
+		 * 파라메타세팅
+		 */
 		pstmt.setInt(1, no);
 		
 		int rowCount = pstmt.executeUpdate();
@@ -96,7 +107,6 @@ public class GuestDao {
 		
 		return rowCount;
 	}
-	
 
 	public Guest findByPrimaryKey(int no) throws Exception {
 
@@ -104,6 +114,9 @@ public class GuestDao {
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NO);
+		/*
+		 * 파라메타세팅
+		 */
 		pstmt.setInt(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -115,11 +128,11 @@ public class GuestDao {
 			String homepage = rs.getString("guest_homepage");
 			String title = rs.getString("guest_title");
 			String content = rs.getString("guest_content");
-			findGuest = new Guest(n, name, date, email, homepage, title, content);
+//			findGuest = new Guest(n, name, date, email, homepage, title, content);
 			System.out.println(findGuest);
 		} else {
 			System.out.println("조건에 만족하는 guest가 없습니다.");
-			findGuest = null;
+//			findGuest = null;
 		}
 		
 		rs.close();
@@ -135,9 +148,12 @@ public class GuestDao {
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
+		/*
+		 * 파라메타세팅
+		 */
 		ResultSet rs = pstmt.executeQuery();
 		
-		while(rs.next()) {
+		 while(rs.next()) {
 			Guest guest=
 					new Guest(rs.getInt("guest_no"),
 							  rs.getString("guest_name"),
@@ -148,24 +164,6 @@ public class GuestDao {
 							  rs.getString("guest_content"));
 			guestList.add(guest);
 		}
-		
-		/*
-		 변경 전 if + do-while
-		 if (rs.next()) {
-			do {
-			int n = rs.getInt("guest_no");
-			String name = rs.getString("guest_name");
-			Date date = rs.getDate("guest_date");
-			String email = rs.getString("guest_email");
-			String homepage = rs.getString("guest_homepage");
-			String title = rs.getString("guest_title");
-			String content = rs.getString("guest_content");
-			Guest guest = new Guest(n, name, date, email, homepage, title, content);
-			guestList.add(guest);
-			} while(rs.next());
-		} else {
-		}
-		 */
 		
 		rs.close();
 		pstmt.close();
