@@ -42,17 +42,14 @@ public class GuestDao {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_INSERT);
 		
-		Date guestDate = new Date();
-		
 		/*
 		 * 파라메타세팅
 		 */
 		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setDate(2, new java.sql.Date(guestDate.getTime()));
-		pstmt.setString(3, guest.getGuest_email());
-		pstmt.setString(4, guest.getGuest_homepage());
-		pstmt.setString(5, guest.getGuest_title());
-		pstmt.setString(6, guest.getGuest_content());
+		pstmt.setString(2, guest.getGuest_email());
+		pstmt.setString(3, guest.getGuest_homepage());
+		pstmt.setString(4, guest.getGuest_title());
+		pstmt.setString(5, guest.getGuest_content());
 		
 		int rowCount = pstmt.executeUpdate();
 		System.out.println(">> " + rowCount + "행 Insert");
@@ -128,7 +125,7 @@ public class GuestDao {
 			String homepage = rs.getString("guest_homepage");
 			String title = rs.getString("guest_title");
 			String content = rs.getString("guest_content");
-//			findGuest = new Guest(n, name, date, email, homepage, title, content);
+			findGuest = new Guest(n, name, date, email, homepage, title, content);
 			System.out.println(findGuest);
 		} else {
 			System.out.println("조건에 만족하는 guest가 없습니다.");
@@ -171,4 +168,38 @@ public class GuestDao {
 		
 		return guestList;
 	}
+	
+	public List<Guest> findByName(String name) throws Exception {
+		
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NAME);
+		pstmt.setString(1, "%" + name + "%");
+		 
+		ResultSet rs = pstmt.executeQuery();
+
+		List<Guest> findByName = new ArrayList<Guest>();
+
+		if (rs.next()) {
+			do {
+				int no = rs.getInt("guest_no");
+				String guestName = rs.getString("guest_name");
+				Date date = rs.getDate("guest_date");
+				String email = rs.getString("guest_email");
+				String homepage = rs.getString("guest_homepage");
+				String title = rs.getString("guest_title");
+				String content = rs.getString("guest_content");
+				Guest guest = new Guest(no, guestName, date, email, homepage, title, content);
+				findByName.add(guest);
+			} while (rs.next());
+		}else {
+			System.out.println("조건에 만족하는 guest가 없습니다.");
+		}
+		
+		rs.close();
+		pstmt.close();
+		dataSource.close(con);
+		
+		return findByName;
+	}
+	
 }

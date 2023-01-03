@@ -15,43 +15,48 @@ public class GuestService {
 	}
 
 	/*
-	 * 방명록쓰기
+	 * 방명록 쓰기
 	 */
 	public int guestWrite(Guest guest) throws Exception {
 		/*
 		<< GuestDao객체사용>>
 		*/
-		int rowCount = 0;
-		guestDao.insert(guest);
-		return 0;
+		return guestDao.insert(guest);
+	}
+	
+	/*
+	 * 방명록 수정
+	 */
+	public int guestUpdate(Guest guest) throws Exception {
+		return guestDao.update(guest);
 	}
 
 	/*
-	 * 방명록번호로 1개보기
+	 * 방명록 번호로 1개보기
 	 */
 	public Guest guestDetail(int guest_no) throws Exception {
-		return null;
+		return guestDao.findByPrimaryKey(guest_no);
 	}
 
 	/*
-	 * 방명록번호로삭제
+	 * 방명록 번호로 삭제
 	 */
 	public int guestDelete(int guest_no) throws Exception {
-		return 0;
+		return guestDao.delete(guest_no);
 	}
 
 	/*
-	 * 방명록 리스트보기
+	 * 방명록 리스트 보기
 	 */
 	public List<Guest> guestList() throws Exception {
-		return null;
+		return guestDao.findAll();
 	}
 	/*
-	 * 방명록 이름으로검색해서 리스트보기
+	 * 방명록 이름으로 검색해서 리스트 보기
 	 */
 
-	public List<Guest> findByGuestName(String guest_name) {
-		return null;
+	public List<Guest> findByGuestName(String guest_name) throws Exception {
+		return guestDao.findByName(guest_name);
 	}
 
 }

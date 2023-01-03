@@ -40,15 +40,12 @@ public class MemberDao {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.MEMBER_INSERT);
 		
-		Date date = new Date();
-		
 		pstmt.setString(1, m.getM_id());
 		pstmt.setString(2, m.getM_password());
 		pstmt.setString(3, m.getM_name());
 		pstmt.setString(4, m.getM_address());
 		pstmt.setInt(5, m.getM_age());
 		pstmt.setString(6, String.valueOf(m.getM_age()));
-		pstmt.setDate(7, new java.sql.Date(date.getTime()));
 		
 		int rowCount = pstmt.executeUpdate();
 		
@@ -62,15 +59,13 @@ public class MemberDao {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.MEMBER_UPDATE);
 		
-		Date date = new Date();
-		
 		pstmt.setString(1, m.getM_password());
 		pstmt.setString(2, m.getM_name());
 		pstmt.setString(3, m.getM_address());
 		pstmt.setInt(4, m.getM_age());
-		pstmt.setString(5, String.valueOf(m.getM_age()));
-		pstmt.setDate(6, new java.sql.Date(date.getTime()));
-		pstmt.setString(7, m.getM_id());
+		pstmt.setString(5, m.getM_married());
+//		pstmt.setDate(6, new java.sql.Date(date.getTime()));
+		pstmt.setString(6, m.getM_id());
 
 		int rowCount = pstmt.executeUpdate();
 		
@@ -94,26 +89,40 @@ public class MemberDao {
 	}
 
 	public Member findByPrimaryKey(String id) throws Exception {
-		Member findMember = null;
-		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.MEMBER_SELECT_BY_NO);
 		pstmt.setString(1, id);
 		ResultSet rs = pstmt.executeQuery();
 		
+		Member findMember = null;
 		if (rs.next()) {
-			String i = rs.getString("m_id");
-			String pw = rs.getString("m_password");
-			String name = rs.getString("m_name");
-			String address = rs.getString("m_address");
-			int age = rs.getInt("m_age");
-			char married = rs.getString("m_married").charAt(0);
-			Date regdate = rs.getDate("m_regdate");
-			findMember = new Member(i, pw, name, address, age, married, regdate);
+			findMember = new Member(rs.getString("m_id"), 
+									rs.getString("m_password"), 
+									rs.getString("m_name"),
+									rs.getString("m_address"), 
+									rs.getInt("m_age"), 
+//									rs.getString("m_married").charAt(0),
+									rs.getString("m_married"),
+									rs.getDate("m_regdate"));
 		} else {
 			findMember = null;
-			System.out.println("member가 존재하지 않습니다.");
+//			System.out.println("member가 존재하지 않습니다.");
 		}
+		
+//		Member findMember = null;
+//		if (rs.next()) {
+//			String i = rs.getString("m_id");
+//			String pw = rs.getString("m_password");
+//			String name = rs.getString("m_name");
+//			String address = rs.getString("m_address");
+//			int age = rs.getInt("m_age");
+//			char married = rs.getString("m_married").charAt(0);
+//			Date regdate = rs.getDate("m_regdate");
+//			findMember = new Member(i, pw, name, address, age, married, regdate);
+//		} else {
+//			findMember = null;
+//			System.out.println("member가 존재하지 않습니다.");
+//		}
 		
 		rs.close();
 		pstmt.close();
@@ -121,6 +130,7 @@ public class MemberDao {
 		
 		return findMember;
 	}
+	
 
 	public List<Member> findAll() throws Exception {
 		Connection con = dataSource.getConnection();
@@ -136,13 +146,14 @@ public class MemberDao {
 				String name = rs.getString("m_name");
 				String address = rs.getString("m_address");
 				int age = rs.getInt("m_age");
-				char married = rs.getString("m_married").charAt(0);
+//				char married = rs.getString("m_married").charAt(0);
+				String married = rs.getString("m_married");
 				Date regdate = rs.getDate("m_regdate");
 				Member member = new Member(i, pw, name, address, age, married, regdate);
 				memberList.add(member);
 			} while (rs.next());
 		} else {
-			System.out.println("member가 존재하지 않습니다.");
+//			System.out.println("member가 존재하지 않습니다.");
 		}
 
 		rs.close();

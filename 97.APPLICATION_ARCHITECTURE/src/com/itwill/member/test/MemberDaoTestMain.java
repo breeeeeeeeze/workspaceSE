@@ -15,12 +15,12 @@ public class MemberDaoTestMain {
 		System.out.println(rowCount + "행 delete 성공");
 		
 		System.out.println("---------- 1.insert ----------");
-		Member insertMember = new Member("tttt", "비밀번호", "LEE", "강원", 27, 'M', null);
+		Member insertMember = new Member("tttt", "비밀번호", "LEE", "강원", 27, "M", null);
 		rowCount = memberDao.insert(insertMember);
 		System.out.println(rowCount + "행 insert 성공");
 		
 		System.out.println("---------- 2.update ----------");
-		Member updateMember = new Member("tttt", "pw", "KIM", "경기", 37, 'F', null);
+		Member updateMember = new Member("tttt", "pw", "KIM", "경기", 37, "F", null);
 		rowCount = memberDao.update(updateMember);
 		System.out.println(rowCount + "행 update 성공");
 		
